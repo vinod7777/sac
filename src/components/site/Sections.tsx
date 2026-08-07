@@ -246,7 +246,7 @@ export function WhatWeDo() {
                 style={{
                   backgroundImage: `url(${p.tone})`,
                 }}
-                className="shadow-card  flex h-[220px] w-[350px] flex-col items-center justify-center rounded-lg text-primary-foreground"
+                className="flex h-[220px] w-[350px] flex-col items-center justify-center rounded-lg text-primary-foreground"
               >
                 <Icon className="size-7 opacity-90" />
 
@@ -705,8 +705,8 @@ export function Footer() {
         </div>
       </div>
       </Reveal>
-      <div className="border-t border-primary-foreground/15 py-4 text-center text-[11px] text-primary-foreground/70">
-        Designed and developed by AITAM Developers club
+      <div className="border-t font-bold border-primary-foreground/15 py-4 text-center text-[18px] text-primary-foreground/70">
+       &copy; Designed and developed by <span className="font-semibold text-[#9e0659]">AITAM</span> Developers club
       </div>
     </footer>
   );
