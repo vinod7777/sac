@@ -277,7 +277,7 @@ export function WhatWeDo() {
                 key={p.title}
                 delay={i * 0.2}
               >
-                <div className={`grid items-center gap-10    ${columns}`}>
+                <div className={`grid items-center   gap-10    ${columns}`}>
                   {panelRight ? (
                     <>
                       {text}
