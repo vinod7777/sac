@@ -20,6 +20,8 @@ import {
   Phone,
   MapPin,
   User,
+  Linkedin,
+  Instagram,
 } from "lucide-react";
 import aboutArt from "@/assets/hero-illustration.png";
 import aitamLogo from "@/assets/aitam-logo.png";
@@ -705,8 +707,32 @@ export function Footer() {
         </div>
       </div>
       </Reveal>
-      <div className="border-t font-bold border-primary-foreground/15 py-4 text-center text-[18px] text-primary-foreground/70">
-       &copy; Designed and developed by <span className="font-semibold text-[#9e0659]">AITAM</span> Developers club
+      <div className="border-t border-primary-foreground/15 py-4 px-5">
+        <div className="mx-auto max-w-6xl flex flex-col sm:flex-row items-center justify-between gap-4 text-primary-foreground/70 font-bold text-[16px] sm:text-[18px]">
+          <div className="flex items-center gap-3">
+            <a
+              href="https://www.linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="grid size-9 place-items-center rounded-full bg-primary-foreground/10 text-primary-foreground transition-all hover:bg-[#0077b5] hover:text-white hover:scale-110"
+            >
+              <Linkedin className="size-5" />
+            </a>
+            <a
+              href="https://www.instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="grid size-9 place-items-center rounded-full bg-primary-foreground/10 text-primary-foreground transition-all hover:bg-gradient-to-tr hover:from-amber-500 hover:via-rose-500 hover:to-purple-600 hover:text-white hover:scale-110"
+            >
+              <Instagram className="size-5" />
+            </a>
+          </div>
+          <div className="text-center sm:text-right">
+            &copy; Designed and developed by <span className="font-semibold text-[#9e0659]">AITAM</span> Developers club
+          </div>
+        </div>
       </div>
     </footer>
   );
