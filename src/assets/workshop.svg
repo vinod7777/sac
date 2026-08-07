@@ -17,7 +17,7 @@
   </defs>
   <g id="workshops" clip-path="url(#clip-workshops)">
     <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Rectangle_591)">
-      <rect id="Rectangle_591-2" data-name="Rectangle 591" width="610" height="298" rx="17" transform="translate(8 10)" fill="url(#linear-gradient)"/>
+      <rect id="Rectangle_591-2" data-name="Rectangle 591" width="610" height="298" rx="0" transform="translate(8 10)" fill="url(#linear-gradient)"/>
     </g>
     <g id="undraw_shared_workspace_hwky" transform="translate(54 50)" opacity="0.1">
       <path id="Path_1813" data-name="Path 1813" d="M568.443,556.238c7.175,7.7,7.546,19.015,7.546,19.015s-11.262-1.167-18.437-8.866-7.546-19.015-7.546-19.015S561.268,548.539,568.443,556.238Z" transform="translate(-333.475 -375)" fill="#9499f1"/>

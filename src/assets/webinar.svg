@@ -17,7 +17,7 @@
   </defs>
   <g id="webinar" clip-path="url(#clip-webinar)">
     <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Rectangle_590)">
-      <rect id="Rectangle_590-2" data-name="Rectangle 590" width="610" height="298" rx="17" transform="translate(8 10)" fill="url(#linear-gradient)"/>
+      <rect id="Rectangle_590-2" data-name="Rectangle 590" width="610" height="298" rx="0" transform="translate(8 10)" fill="url(#linear-gradient)"/>
     </g>
     <g id="undraw_teaching_f1cm" transform="translate(142 22)" opacity="0.22">
       <rect id="Rectangle_432" data-name="Rectangle 432" width="30.066" height="9.09" rx="4.545" transform="translate(67.778 45.449)" fill="#9499f1" opacity="0.1"/>

@@ -17,7 +17,7 @@
   </defs>
   <g id="projects" clip-path="url(#clip-projects)">
     <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Rectangle_593)">
-      <rect id="Rectangle_593-2" data-name="Rectangle 593" width="610" height="298" rx="17" transform="translate(8 10)" fill="url(#linear-gradient)"/>
+      <rect id="Rectangle_593-2" data-name="Rectangle 593" width="610" height="298" rx="0" transform="translate(8 10)" fill="url(#linear-gradient)"/>
     </g>
     <g id="undraw_project_completed_w0oq" transform="translate(167.361 42)" opacity="0.12">
       <rect id="Rectangle_551" data-name="Rectangle 551" width="292.24" height="0.68" transform="translate(0 218.238)" fill="#3f3d56"/>

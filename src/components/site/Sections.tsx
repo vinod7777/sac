@@ -270,7 +270,7 @@ export function WhatWeDo() {
                 style={{
                   backgroundImage: `url(${p.tone})`,
                 }}
-                className="flex h-[220px] w-[350px] flex-col items-center justify-center rounded-lg text-primary-foreground"
+                className="flex h-[220px] w-[350px] flex-col items-center justify-center   text-primary-foreground"
               >
                 <Icon className="size-7 opacity-90" />
 
@@ -763,7 +763,7 @@ export function Footer() {
               aria-label="LinkedIn"
               className="inline-flex size-8 items-center justify-center rounded-full border border-primary-foreground/20 bg-white/10 transition-all hover:bg-white/20 hover:scale-110"
             >
-              <Linkedin className="size-4 text-[#0a66c2]" />
+              <Linkedin className="size-4 text-white" />
             </a>
             <a
               href="https://www.instagram.com/aitamsac"
@@ -772,11 +772,11 @@ export function Footer() {
               aria-label="Instagram"
               className="inline-flex size-8 items-center justify-center rounded-full border border-primary-foreground/20 bg-white/10 transition-all hover:bg-white/20 hover:scale-110"
             >
-              <Instagram className="size-4 text-[#e4405f]" />
+              <Instagram className="size-4 text-white" />
             </a>
           </div>
-          <div className="text-center text-[15px] font-bold sm:text-[18px]">
-            &copy; Designed and developed by <span className="font-semibold text-[#9e0659]">AITAM</span> Developers club
+          <div className="text-center text-[15px] font-bold sm:text-[16px]">
+            &copy; Designed and developed by <span className="font-semibold text-[#c11d60]">AITAM</span> Developers club
           </div>
         </div>
       </div>
