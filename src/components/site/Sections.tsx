@@ -25,6 +25,14 @@ import {
 } from "lucide-react";
 import aboutArt from "@/assets/hero-illustration.png";
 import aitamLogo from "@/assets/aitam-logo.png";
+import salesforceLogo from "@/assets/salefore.png";
+import aitamAlumniLogo from "@/assets/arum_logo.svg";
+import younifyLogo from "@/assets/younify.jpg";
+import suprajaLogo from "@/assets/supraja-logo.png";
+import yaanveLogo from "@/assets/yaanve.png";
+import qualivonLogo from "@/assets/qualivon_technologies.png";
+import panditLogo from "@/assets/pandit-logo.png";
+import vhelpLogo from "@/assets/Vhelp_logo.jfif";
 import { Reveal } from "./Reveal";
 import {
   clubs,
@@ -36,6 +44,20 @@ import {
   clients,
   partners,
 } from "@/data/sac";
+
+const clientLogos = [
+  { name: "Yaanve Technologies", logo: yaanveLogo },
+  { name: "Qualivon Technologies", logo: qualivonLogo },
+  { name: "Pandiit Academy", logo: panditLogo },
+  { name: "VHelp", logo: vhelpLogo },
+];
+
+const partnerLogos = [
+  { name: "Salesforce Admin Group", logo: salesforceLogo },
+  { name: "AITAM Alumni Network", logo: aitamAlumniLogo },
+  { name: "Younify", logo: younifyLogo },
+  { name: "Supraja Technologies", logo: suprajaLogo },
+];
 
 const icons: Record<string, React.ElementType> = {
   Bot,
@@ -621,10 +643,34 @@ export function Logos() {
   return (
     <section id="partners" className="scroll-mt-24 py-14">
       <Heading>Our Clients</Heading>
-      <LogoRow items={clients} />
+      <div className="mx-auto mt-8 grid max-w-4xl grid-cols-2 gap-4 px-5 sm:grid-cols-4">
+        {clientLogos.map((c, i) => (
+          <Reveal key={c.name} delay={i * 0.05}>
+            <div className="shadow-soft flex h-24 items-center justify-center rounded-xl border border-border bg-white p-4 transition-all duration-300 hover:scale-105 hover:shadow-card">
+              <img
+                src={c.logo}
+                alt={c.name}
+                className="max-h-16 w-auto max-w-full object-contain"
+              />
+            </div>
+          </Reveal>
+        ))}
+      </div>
       <div className="mt-14">
         <Heading>Our Partners</Heading>
-        <LogoRow items={partners} />
+        <div className="mx-auto mt-8 grid max-w-4xl grid-cols-2 gap-4 px-5 sm:grid-cols-4">
+          {partnerLogos.map((p, i) => (
+            <Reveal key={p.name} delay={i * 0.05}>
+              <div className="shadow-soft flex h-24 items-center justify-center rounded-xl border border-border bg-white p-4 transition-all duration-300 hover:scale-105 hover:shadow-card">
+                <img
+                  src={p.logo}
+                  alt={p.name}
+                  className="max-h-16 w-auto max-w-full object-contain"
+                />
+              </div>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );
