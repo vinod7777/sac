@@ -776,7 +776,7 @@ export function Footer() {
             </a>
           </div>
           <div className="text-center text-[15px] font-bold sm:text-[16px]">
-            &copy; Designed and developed by <span className="font-semibold text-[#c11d60]">AITAM</span> Developers club
+            &copy; Designed and developed by <a href="https://www.adityatekkali.edu.in/" className="font-semibold text-[#c11d60]">AITAM</a> Developers club
           </div>
         </div>
       </div>
