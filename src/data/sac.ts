@@ -112,30 +112,34 @@ export const clubs = [
     color: "var(--club-slate)",
   },
 ];
+import webinarImage from "../../src/assets/webinar.svg";
+import workshopImage from "../../src/assets/workshop.svg";
+import eventsImage from "../../src/assets/events.svg";
+import projectsImage from "../../src/assets/projects.svg";
 
 export const pillars = [
   {
     title: "Webinar",
     icon: "Video",
-    tone: "var(--brand)",
+    tone: webinarImage,
     desc: "Webinars are the foundation for the students out there in the SAC, which motivates and attracts students of various clubs in the respective fields by eminent persons from the industry. Webinars focus on providing a bird eye overview on a particular technology and let the student know the industry trends and advancements to start that as their career path. Webinars build up confidence and hope of getting succeed in the selected path. They are hosted by SAC where speakers are professionals from India and abroad too, enabling students to explore various areas of industry.",
   },
   {
     title: "WorkShops",
     icon: "Wrench",
-    tone: "var(--club-slate)",
+    tone: workshopImage,
     desc: "In view of getting students strengthened in some aspect, Workshops are hosted to provide mentorship for learning from scratch in a time of 1 day to 1 week which enables improvement in the students communication, team building, and the niche in the technology where training is been given. All round development is the only motive for hosting workshops.",
   },
   {
     title: "Events",
     icon: "CalendarDays",
-    tone: "var(--club-pink)",
+    tone: eventsImage,
     desc: "The events focus on students involvement and passion for enhancing public speaking and management skills which are always essential for a professional to manage all the things around them, ensuring holistic events and tech events focusing on exposure of their technical skills at a competitive level.",
   },
   {
     title: "Projects",
     icon: "Rocket",
-    tone: "var(--club-rust)",
+    tone: projectsImage,
     desc: "A strong applicative knowledge makes a student stand out from the rest. That is the key for success of students at SAC — the things learnt need to be applied is the only motto of every student who aspires to become a better individual. Many real time projects are assigned to students by various clients which provides an exposure to the outside community, and students from SAC always explore new pathways in implementing projects for real time problems.",
   },
 ];

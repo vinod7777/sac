@@ -1,16 +1,16 @@
-import heroArt from "@/assets/hero-illustration.png";
+import heroArt from "@/assets/topnav.svg";
 import heroBg from "@/assets/hero.png";
 import { Reveal } from "./Reveal";
 
 export function Hero() {
   return (
     <section id="top" className="relative">
-      <div className="relative overflow-hidden bg-background pb-32 pt-28 sm:pb-40 sm:pt-32">
+      <div className="relative overflow-hidden bg-background pb-32 pt-28 sm:pb-70 ">
         <img
           src={heroBg}
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover transform-gpu scale-100"
         />
         <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-5 lg:grid-cols-2">
           <Reveal>

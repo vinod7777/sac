@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="626" height="318" viewBox="0 0 626 318">
+  <defs>
+    <linearGradient id="linear-gradient" y1="0.02" x2="0.844" y2="1.028" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#cb1f65"/>
+      <stop offset="1" stop-color="#661033"/>
+    </linearGradient>
+    <filter id="Rectangle_592" x="2" y="4" width="628" height="316" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.29"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-events">
+      <rect width="626" height="318"/>
+    </clipPath>
+  </defs>
+  <g id="events" clip-path="url(#clip-events)">
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Rectangle_592)">
+      <rect id="Rectangle_592-2" data-name="Rectangle 592" width="610" height="298" rx="17" transform="translate(8 10)" fill="url(#linear-gradient)"/>
+    </g>
+    <g id="undraw_online_test_gba7" transform="translate(93 58)" opacity="0.11">
+      <path id="Path_1956" data-name="Path 1956" d="M186.88,598.8l-.591-.221c-.13-.049-13.051-5-19.1-16.224s-3.089-24.741-3.058-24.875l.139-.615.591.221c.13.049,13.05,5,19.1,16.224s3.089,24.741,3.058,24.875Zm-18.725-16.968c5.117,9.491,15.328,14.355,17.915,15.466.492-2.773,2.034-13.985-3.078-23.467s-15.327-14.353-17.915-15.466c-.492,2.775-2.034,13.986,3.078,23.467Z" transform="translate(-147.488 -405.542)" fill="#3f3d56"/>
+      <path id="Path_1957" data-name="Path 1957" d="M153.622,597.848c10.877,6.544,15.067,19.543,15.067,19.543s-13.447,2.388-24.324-4.156S129.3,593.692,129.3,593.692,142.745,591.3,153.622,597.848Z" transform="translate(-129.298 -424.974)" fill="#d0cde1"/>
+      <path id="Path_1958" data-name="Path 1958" d="M577.462,234.79H456.167v-2.5h-55v2.5h-121.8a8.2,8.2,0,0,0-8.2,8.2V409.085a8.2,8.2,0,0,0,8.2,8.2h298.09a8.2,8.2,0,0,0,8.2-8.2V242.995a8.2,8.2,0,0,0-8.205-8.2Z" transform="translate(-205.026 -232.29)" fill="#3f3d56"/>
+      <rect id="Rectangle_527" data-name="Rectangle 527" width="292.5" height="165" transform="translate(77.142 17)" fill="#9499f1"/>
+      <circle id="Ellipse_138" data-name="Ellipse 138" cx="3" cy="3" r="3" transform="translate(220.142 6.5)" fill="#9499f1"/>
+      <path id="Path_1959" data-name="Path 1959" d="M870.261,297.922H856.4V284.057h13.865Zm-13.262-.6h12.66V284.66H857Z" transform="translate(-517.411 -259.922)" fill="#3f3d56"/>
+      <path id="Path_1960" data-name="Path 1960" d="M579.568,613.41H551.022v-2.057a.408.408,0,0,0-.408-.408h-9.787a.408.408,0,0,0-.408.408v2.057H534.3v-2.057a.408.408,0,0,0-.408-.408h-9.787a.408.408,0,0,0-.408.408v2.057h-6.117v-2.057a.408.408,0,0,0-.408-.408h-9.787a.408.408,0,0,0-.408.408v2.057h-6.117v-2.057a.408.408,0,0,0-.408-.408h-9.787a.408.408,0,0,0-.408.408v2.057h-6.117v-2.057a.408.408,0,0,0-.408-.408h-9.787a.408.408,0,0,0-.408.408v2.057h-6.117v-2.057a.408.408,0,0,0-.408-.408h-9.787a.408.408,0,0,0-.408.408v2.057H450.7v-2.057a.408.408,0,0,0-.408-.408H373.629a.408.408,0,0,0-.408.408v2.057H367.1v-2.057a.408.408,0,0,0-.408-.408h-9.787a.408.408,0,0,0-.408.408v2.057h-6.117v-2.057a.408.408,0,0,0-.408-.408h-9.787a.408.408,0,0,0-.408.408v2.057h-6.117v-2.057a.408.408,0,0,0-.408-.408h-9.787a.408.408,0,0,0-.408.408v2.057h-6.117v-2.057a.408.408,0,0,0-.408-.408h-9.787a.408.408,0,0,0-.408.408v2.057h-6.117v-2.057a.408.408,0,0,0-.408-.408h-9.787a.408.408,0,0,0-.408.408v2.057H283.5v-2.057a.408.408,0,0,0-.408-.408h-9.787a.408.408,0,0,0-.408.408v2.057H254.143a9.787,9.787,0,0,0-9.787,9.787v4.426a9.787,9.787,0,0,0,9.787,9.787H579.568a9.787,9.787,0,0,0,9.787-9.787V623.2a9.787,9.787,0,0,0-9.787-9.787Z" transform="translate(-190.714 -434.41)" fill="#3f3d56"/>
+      <rect id="Rectangle_528" data-name="Rectangle 528" width="425.512" height="1.299" transform="translate(13.386 192.959)" fill="#3f3d56"/>
+      <path id="Path_1961" data-name="Path 1961" d="M775.546,404.576H681.37V350.961h94.176Zm-93.243-.932h92.311v-51.75H682.3Z" transform="translate(-423.985 -295.635)" fill="#3f3d56"/>
+      <path id="Path_1962" data-name="Path 1962" d="M417.289,429.177H333.37V376.961h83.919Zm-82.986-.932h82.054V377.893H334.3Z" transform="translate(-238.228 -309.513)" fill="#3f3d56"/>
+      <path id="Path_1963" data-name="Path 1963" d="M413.332,423.284l-.08-1.043a9.2,9.2,0,0,1,2.486-6.936c1.8-2.125,2.807-3.689,2.807-5.493,0-2.045-1.283-3.408-3.809-3.448a7.124,7.124,0,0,0-4.05,1.243l-.962-2.526a10.511,10.511,0,0,1,5.733-1.6c4.611,0,6.7,2.847,6.7,5.894,0,2.727-1.524,4.691-3.448,6.976-1.764,2.085-2.406,3.849-2.285,5.894l.04,1.043Zm-.882,5.613a2.37,2.37,0,0,1,2.406-2.526,2.34,2.34,0,0,1,2.366,2.526,2.388,2.388,0,1,1-4.771,0Z" transform="translate(-278.985 -323.667)" fill="#d0cde1"/>
+      <path id="Path_1964" data-name="Path 1964" d="M772.332,398.284l-.08-1.043a9.2,9.2,0,0,1,2.486-6.936c1.8-2.125,2.807-3.689,2.807-5.493,0-2.045-1.283-3.408-3.809-3.448a7.124,7.124,0,0,0-4.05,1.243l-.962-2.526a10.511,10.511,0,0,1,5.733-1.6c4.611,0,6.7,2.847,6.7,5.894,0,2.727-1.524,4.691-3.448,6.976-1.764,2.085-2.406,3.849-2.285,5.894l.04,1.043Zm-.882,5.613a2.37,2.37,0,0,1,2.406-2.526,2.34,2.34,0,0,1,2.366,2.526,2.388,2.388,0,1,1-4.771,0Z" transform="translate(-470.613 -310.323)" fill="#d0cde1"/>
+      <circle id="Ellipse_139" data-name="Ellipse 139" cx="40.231" cy="40.231" r="40.231" transform="translate(184.808 81.381)" fill="#2f2e41"/>
+      <path id="Path_1965" data-name="Path 1965" d="M435.595,347.773,423.568,345.6l3.9-25.112,12.026,2.177Z" transform="translate(-226.094 -171.069)" fill="#2f2e41"/>
+      <rect id="Rectangle_529" data-name="Rectangle 529" width="12.222" height="21.898" transform="translate(225.43 153.769) rotate(10.261)" fill="#2f2e41"/>
+      <ellipse id="Ellipse_140" data-name="Ellipse 140" cx="3.819" cy="10.185" rx="3.819" ry="10.185" transform="matrix(0.198, -0.98, 0.98, 0.198, 220.871, 178.379)" fill="#2f2e41"/>
+      <ellipse id="Ellipse_141" data-name="Ellipse 141" cx="3.819" cy="10.185" rx="3.819" ry="10.185" transform="translate(195.849 179.13) rotate(-82.454)" fill="#2f2e41"/>
+      <circle id="Ellipse_142" data-name="Ellipse 142" cx="13.75" cy="13.75" r="13.75" transform="translate(214.106 98.021)" fill="#fff"/>
+      <circle id="Ellipse_143" data-name="Ellipse 143" cx="4.583" cy="4.583" r="4.583" transform="translate(228.924 102.259)" fill="#3f3d56"/>
+      <path id="Path_1966" data-name="Path 1966" d="M543.9,366.969c-.6-14.894,12.232-27.509,28.671-28.177s30.257,10.865,30.862,25.759-10.823,18.278-27.262,18.946S544.5,381.864,543.9,366.969Z" transform="translate(-350.592 -289.124)" fill="#fff"/>
+      <ellipse id="Ellipse_144" data-name="Ellipse 144" cx="20.115" cy="6.315" rx="20.115" ry="6.315" transform="matrix(0.975, -0.223, 0.223, 0.975, 241.168, 112.622)" fill="#2f2e41"/>
+      <ellipse id="Ellipse_145" data-name="Ellipse 145" cx="20.115" cy="6.315" rx="20.115" ry="6.315" transform="matrix(0.975, -0.223, 0.223, 0.975, 162.197, 125.754)" fill="#2f2e41"/>
+      <path id="Path_1967" data-name="Path 1967" d="M588.121,521.673a9.167,9.167,0,1,0,18.04,3.266c.9-4.982-2.95-6.744-7.931-7.646S589.023,516.691,588.121,521.673Z" transform="translate(-374.131 -384.207)" fill="#fff"/>
+      <rect id="Rectangle_530" data-name="Rectangle 530" width="66.15" height="62.924" transform="translate(72.047 6.118)" fill="#d0cde1"/>
+      <rect id="Rectangle_531" data-name="Rectangle 531" width="51.116" height="39.089" transform="translate(79.564 13.635)" fill="#fff"/>
+      <rect id="Rectangle_532" data-name="Rectangle 532" width="27.804" height="1.463" transform="translate(79.513 57.335)" fill="#f2f2f2"/>
+      <rect id="Rectangle_533" data-name="Rectangle 533" width="27.804" height="1.463" transform="translate(79.513 61.725)" fill="#f2f2f2"/>
+      <circle id="Ellipse_146" data-name="Ellipse 146" cx="5.853" cy="5.853" r="5.853" transform="translate(82.806 27.336)" fill="#3f3d56"/>
+      <circle id="Ellipse_147" data-name="Ellipse 147" cx="5.853" cy="5.853" r="5.853" transform="translate(99.268 27.336)" fill="#9499f1"/>
+      <circle id="Ellipse_148" data-name="Ellipse 148" cx="5.853" cy="5.853" r="5.853" transform="translate(115.731 27.336)" fill="#e6e6e6"/>
+      <circle id="Ellipse_149" data-name="Ellipse 149" cx="2.927" cy="2.927" r="2.927" transform="translate(102.195 6.849)" fill="#3f3d56"/>
+      <rect id="Rectangle_534" data-name="Rectangle 534" width="66.15" height="62.924" transform="translate(103.51 127.957)" fill="#d0cde1"/>
+      <rect id="Rectangle_535" data-name="Rectangle 535" width="51.116" height="39.089" transform="translate(111.028 135.474)" fill="#fff"/>
+      <rect id="Rectangle_536" data-name="Rectangle 536" width="17.92" height="17.92" transform="translate(122.275 141.898)" fill="#9499f1"/>
+      <path id="Path_1968" data-name="Path 1968" d="M406.284,546.262v21.76h21.76v-21.76ZM427.1,567.078H407.228V547.206H427.1Z" transform="translate(-277.149 -399.883)" fill="#3f3d56"/>
+      <rect id="Rectangle_537" data-name="Rectangle 537" width="27.804" height="1.463" transform="translate(110.977 178.443)" fill="#f2f2f2"/>
+      <circle id="Ellipse_150" data-name="Ellipse 150" cx="2.927" cy="2.927" r="2.927" transform="translate(133.659 128.689)" fill="#3f3d56"/>
+      <rect id="Rectangle_538" data-name="Rectangle 538" width="66.15" height="62.924" transform="translate(275.738 109.119)" fill="#d0cde1"/>
+      <rect id="Rectangle_539" data-name="Rectangle 539" width="51.116" height="39.089" transform="translate(283.254 116.636)" fill="#fff"/>
+      <rect id="Rectangle_540" data-name="Rectangle 540" width="10.996" height="3.259" transform="translate(303.314 147.237)" fill="#3f3d56"/>
+      <rect id="Rectangle_541" data-name="Rectangle 541" width="37.585" height="1.397" transform="translate(290.02 121.866)" fill="#3f3d56"/>
+      <rect id="Rectangle_542" data-name="Rectangle 542" width="37.585" height="1.397" transform="translate(290.02 126.288)" fill="#3f3d56"/>
+      <rect id="Rectangle_543" data-name="Rectangle 543" width="37.585" height="1.397" transform="translate(290.02 130.711)" fill="#3f3d56"/>
+      <rect id="Rectangle_544" data-name="Rectangle 544" width="37.585" height="1.397" transform="translate(290.02 135.133)" fill="#3f3d56"/>
+      <rect id="Rectangle_545" data-name="Rectangle 545" width="37.585" height="1.397" transform="translate(290.02 139.556)" fill="#3f3d56"/>
+      <rect id="Rectangle_546" data-name="Rectangle 546" width="27.804" height="1.463" transform="translate(283.203 159.605)" fill="#f2f2f2"/>
+      <rect id="Rectangle_547" data-name="Rectangle 547" width="38.779" height="1.463" transform="translate(283.203 163.263)" fill="#f2f2f2"/>
+      <circle id="Ellipse_151" data-name="Ellipse 151" cx="2.927" cy="2.927" r="2.927" transform="translate(305.886 109.851)" fill="#3f3d56"/>
+    </g>
+  </g>
+</svg>

@@ -21,7 +21,7 @@ import {
   MapPin,
   User,
 } from "lucide-react";
-import aboutArt from "@/assets/about-illustration.png";
+import aboutArt from "@/assets/hero-illustration.png";
 import aitamLogo from "@/assets/aitam-logo.png";
 import { Reveal } from "./Reveal";
 import {
@@ -63,7 +63,7 @@ export function About() {
     <section id="about" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-14">
       <Reveal>
         <h2 className="font-display text-3xl font-semibold text-brand-deep sm:text-4xl">About SAC</h2>
-        <div className="mt-6 grid items-center gap-8 md:grid-cols-[1.5fr_1fr]">
+        <div className="mt-6 grid items-start gap-6 md:grid-cols-[1.5fr_1fr]">
           <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
             Student Activity Center is the apex student body of AITAM, responsible for formulating the
             policies pertaining to all the non-academic affairs, resulting in a holistic workspace and
@@ -222,38 +222,82 @@ export function Clubs() {
 
 export function WhatWeDo() {
   return (
-    <section id="what-we-do" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-14">
-      <Heading>What We Do</Heading>
-      <div className="mt-10 space-y-8">
-        {pillars.map((p, i) => {
-          const Icon = icons[p.icon] ?? Video;
-          const panelRight = i % 2 === 0;
-          const panel = (
-            <div
-              key="panel"
-              style={{ backgroundColor: p.tone }}
-              className="shadow-card flex min-h-[130px] flex-col items-center justify-center rounded-lg p-6 text-primary-foreground"
-            >
-              <Icon className="size-6 opacity-90" />
-              <h3 className="mt-2 font-display text-xl font-semibold sm:text-2xl">{p.title}</h3>
-              <span className="mt-1 inline-flex items-center gap-1 text-sm opacity-90">
-                View More <ArrowRight className="size-4" />
-              </span>
-            </div>
-          );
-          const text = (
-            <p key="text" className="self-center text-sm leading-relaxed text-muted-foreground sm:text-base">
-              {p.desc}
-            </p>
-          );
-          return (
-            <Reveal key={p.title} delay={i * 0.1}>
-              <div className="grid gap-5 md:grid-cols-[1.7fr_1fr]">
-                {panelRight ? [text, panel] : [panel, text]}
+    <section className="py-16">
+      <div className="mx-auto max-w-7xl px-0">
+        {/* Section Heading */}
+        <div className="mb-0 text-center">
+          <h2 className="font-display text-3xl font-bold sm:text-4xl">
+            What We Do
+          </h2>
+        </div>
+
+        {/* Pillars */}
+        <div className="space-y-0 ">
+          {pillars.map((p, i) => {
+            const Icon = icons[p.icon] ?? Video;
+            const panelRight = i % 2 === 0;
+            const columns = panelRight
+              ? "md:grid-cols-[minmax(0,1fr)_auto]"
+              : "md:grid-cols-[auto_minmax(0,1fr)]";
+
+            const panel = (
+              <div
+                key={`panel-${p.title}`}
+                style={{
+                  backgroundImage: `url(${p.tone})`,
+                }}
+                className="shadow-card  flex h-[220px] w-[350px] flex-col items-center justify-center rounded-lg text-primary-foreground"
+              >
+                <Icon className="size-7 opacity-90" />
+
+                <h3 className="text-center font-display text-xl font-semibold sm:text-2xl">
+                  {p.title}
+                </h3>
+
+                <span className="inline-flex items-center gap-1 text-sm opacity-90">
+                  View More
+                  <ArrowRight className="size-4" />
+                </span>
               </div>
-            </Reveal>
-          );
-        })}
+            );
+
+            const text = (
+              <div
+                key={`text-${p.title}`}
+                className="flex items-start  w-full"
+              >
+                <p className="text-sm text-muted-foreground sm:text-base">
+                  {p.desc}
+                </p>
+              </div>
+            );
+
+            return (
+              <Reveal
+                key={p.title}
+                delay={i * 0.2}
+              >
+                <div className={`grid items-center gap-10    ${columns}`}>
+                  {panelRight ? (
+                    <>
+                      {text}
+                      <div className="flex justify-start md:justify-end">
+                        {panel}
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="flex justify-start md:justify-start">
+                        {panel}
+                      </div>
+                      {text}
+                    </>
+                  )}
+                </div>
+              </Reveal>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
@@ -328,7 +372,7 @@ export function Stats() {
       <Heading>Activities Done By SAC</Heading>
       <div className="mx-auto mt-10 grid max-w-5xl grid-cols-2 gap-10 px-5 lg:grid-cols-4">
         {stats.map((s, i) => (
-          <Reveal key={s.label} delay={i * 0.1}>
+          <Reveal key={s.label} delay={i * 0.2}>
             <Ring value={s.value} max={s.max} label={s.label} suffix={s.value >= 1000 ? "+" : ""} />
           </Reveal>
         ))}
