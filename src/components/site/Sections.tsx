@@ -707,8 +707,32 @@ export function Footer() {
         </div>
       </div>
       </Reveal>
-      <div className="border-t font-bold border-primary-foreground/15 py-4 text-center text-[18px] text-primary-foreground/70">
-       &copy; Designed and developed by <span className="font-semibold text-[#9e0659]">AITAM</span> Developers club
+      <div className="border-t border-primary-foreground/15 py-4 text-primary-foreground/70">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 sm:flex-row">
+          <div className="flex items-center gap-3 text-primary-foreground/80">
+            <a
+              href="https://www.linkedin.com/company/aitam-sac"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="inline-flex size-8 items-center justify-center rounded-full border border-primary-foreground/20 bg-white/10 transition-all hover:bg-white/20 hover:scale-110"
+            >
+              <Linkedin className="size-4 text-[#0a66c2]" />
+            </a>
+            <a
+              href="https://www.instagram.com/aitamsac"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="inline-flex size-8 items-center justify-center rounded-full border border-primary-foreground/20 bg-white/10 transition-all hover:bg-white/20 hover:scale-110"
+            >
+              <Instagram className="size-4 text-[#e4405f]" />
+            </a>
+          </div>
+          <div className="text-center text-[15px] font-bold sm:text-[18px]">
+            &copy; Designed and developed by <span className="font-semibold text-[#9e0659]">AITAM</span> Developers club
+          </div>
+        </div>
       </div>
     </footer>
   );
