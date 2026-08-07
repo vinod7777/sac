@@ -5,12 +5,12 @@ import { Reveal } from "./Reveal";
 export function Hero() {
   return (
     <section id="top" className="relative">
-      <div className="relative overflow-hidden bg-background pb-32 pt-28 sm:pb-70 ">
+      <div className="relative overflow-hidden bg-background pb-14 pt-20 sm:pb-70 sm:pt-28">
         <img
           src={heroBg}
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover transform-gpu scale-100"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-top lg:object-top lg:[object-position:center_top] transform-gpu"
         />
         <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-5 lg:grid-cols-2">
           <Reveal>
