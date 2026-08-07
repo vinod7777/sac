@@ -387,21 +387,26 @@ export function Events() {
     <section id="events" className="scroll-mt-24 bg-section py-14">
       <Heading>New Events</Heading>
       <div className="mx-auto mt-10 grid max-w-5xl gap-5 px-5 md:grid-cols-3">
-        {events.map((e, i) => (
-          <Reveal key={e.title + e.dates} delay={i * 0.1}>
-            <article
-              className="shadow-soft overflow-hidden rounded-lg border border-border bg-card transition-transform hover:-translate-y-1"
+        {events.slice(0, 3).map((e, i) => (
+          <Reveal key={e.slug || e.title} delay={i * 0.1} className="h-full">
+            <Link
+              to="/events/$slug"
+              params={{ slug: e.slug }}
+              className="shadow-soft flex h-full flex-col justify-between overflow-hidden rounded-lg border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card group"
             >
-              <div className="bg-brand-gradient flex h-24 items-center justify-center px-4">
-                <span className="text-center font-display text-sm font-semibold text-primary-foreground">
-                  {e.title}
-                </span>
+              <div
+                className="flex h-24 items-center justify-center px-4 text-center font-display text-sm font-semibold text-primary-foreground line-clamp-2 transition-all group-hover:brightness-110"
+                style={{ backgroundColor: e.color || "var(--brand)" }}
+              >
+                <span>{e.title}</span>
               </div>
-              <div className="space-y-2 p-4">
-                <h3 className="font-display text-[13px] font-semibold text-brand-deep">{e.title}</h3>
-                <p className="text-[11px] text-muted-foreground">
-                  {e.dates} · {e.club}
-                </p>
+              <div className="flex flex-1 flex-col justify-between space-y-2 p-4">
+                <div>
+                  <h3 className="font-display text-[13px] font-semibold text-brand-deep group-hover:text-brand transition-colors line-clamp-2">{e.title}</h3>
+                  <p className="mt-1 text-[11px] text-muted-foreground">
+                    {e.dates} · {e.club}
+                  </p>
+                </div>
                 <div className="flex items-center justify-between pt-2 text-[11px]">
                   <span className="font-semibold text-brand">Price : {e.price}</span>
                   <span className="rounded bg-secondary px-2 py-0.5 text-secondary-foreground">
@@ -409,17 +414,17 @@ export function Events() {
                   </span>
                 </div>
               </div>
-            </article>
+            </Link>
           </Reveal>
         ))}
       </div>
       <div className="mt-8 text-center">
-        <a
-          href="#events"
+        <Link
+          to="/events"
           className="inline-flex items-center gap-2 rounded border border-brand px-4 py-2 text-xs font-semibold text-brand transition-colors hover:bg-brand hover:text-primary-foreground"
         >
           View More <ArrowRight className="size-3" />
-        </a>
+        </Link>
       </div>
     </section>
   );
