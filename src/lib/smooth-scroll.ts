@@ -1,5 +1,3 @@
-import { animate } from "framer-motion";
-
 export const NAV_OFFSET = 80;
 
 export function scrollToHash(hash: string, offset = NAV_OFFSET) {
@@ -14,14 +12,7 @@ export function scrollToHash(hash: string, offset = NAV_OFFSET) {
     targetTop = el.getBoundingClientRect().top + window.scrollY - offset;
   }
 
-  animate(window.scrollY, targetTop, {
-    type: "spring",
-    stiffness: 80,
-    damping: 20,
-    mass: 1,
-    onUpdate: (latest) => window.scrollTo(0, latest)
-  });
-  
+  window.scrollTo({ top: targetTop, behavior: "auto" });
   return true;
 }
 
@@ -31,7 +22,7 @@ export function scrollToHashWhenReady(hash: string, tries = 20) {
   let attempt = 0;
   const tick = () => {
     if (scrollToHash(hash) || attempt++ >= tries) return;
-    window.setTimeout(tick, 50);
+    window.setTimeout(tick, 10);
   };
   tick();
 }

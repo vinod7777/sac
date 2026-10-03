@@ -17,6 +17,7 @@ import {
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Sections";
 import { clubs } from "@/data/sac";
+import { fetchCmsClubs, type CmsClub, API_BASE_URL } from "@/lib/api";
 
 const icons: Record<string, typeof Code2> = {
   Music,
@@ -30,10 +31,18 @@ const icons: Record<string, typeof Code2> = {
 };
 
 export const Route = createFileRoute("/clubs/$slug")({
-  loader: ({ params }) => {
-    const club = clubs.find((c) => c.slug === params.slug);
+  loader: async ({ params }) => {
+    let allClubs: CmsClub[] = [];
+    try {
+      allClubs = await fetchCmsClubs();
+    } catch {
+      // fallback
+    }
+    const club =
+      allClubs.find((c) => c.slug === params.slug) ||
+      (clubs.find((c) => c.slug === params.slug) as CmsClub | undefined);
     if (!club) throw notFound();
-    return { club };
+    return { club, allClubs: allClubs.length > 0 ? allClubs : (clubs as CmsClub[]) };
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
@@ -71,15 +80,26 @@ function ClubNotFound() {
 }
 
 function ClubDetail() {
-  const { club } = Route.useLoaderData();
+  const { club, allClubs } = Route.useLoaderData();
   const Icon = icons[club.icon] ?? Code2;
-  const others = clubs.filter((c) => c.slug !== club.slug).slice(0, 4);
+  const others = (allClubs || clubs).filter((c) => c.slug !== club.slug).slice(0, 4);
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
 
       <header className="relative overflow-hidden pt-28 pb-24" style={{ backgroundColor: club.color }}>
+        {club.image ? (
+          <img
+            src={
+              club.image.startsWith("http") || club.image.startsWith("data:")
+                ? club.image
+                : `${API_BASE_URL.replace("/backend/api", "")}${club.image}`
+            }
+            alt={club.name}
+            className="absolute inset-0 h-full w-full object-cover mix-blend-overlay opacity-30"
+          />
+        ) : null}
         <div className="pointer-events-none absolute -right-24 -top-24 size-80 rounded-full bg-white/10 blur-3xl" />
         <div className="relative mx-auto max-w-5xl px-6 text-white">
           <Link
@@ -117,39 +137,53 @@ function ClubDetail() {
           <p className="mt-3 text-sm leading-relaxed text-foreground/70">{club.about}</p>
         </section>
 
-        <section className="mt-12 grid gap-5 sm:grid-cols-2">
-          <article className="rounded-2xl border border-black/5 bg-white p-6 shadow-soft">
-            <div className="flex items-center gap-3">
-              <span
-                className="grid size-12 place-items-center rounded-full text-white"
-                style={{ backgroundColor: club.color }}
-              >
-                <UserRound className="size-6" />
-              </span>
-              <div>
-                <p className="text-[11px] font-bold uppercase tracking-wider text-foreground/50">Club Mentor</p>
-                <p className="font-display text-base font-bold text-brand-deep">{club.mentor}</p>
-              </div>
-            </div>
-            <p className="mt-4 text-[13px] text-foreground/70">{club.mentorRole}</p>
-          </article>
+        {(club.mentor || club.studentOrganizer || club.studentMentor) ? (
+          <section className="mt-12 grid gap-5 sm:grid-cols-2">
+            {club.mentor ? (
+              <article className="rounded-2xl border border-black/5 bg-white p-6 shadow-soft">
+                <div className="flex items-center gap-3">
+                  <span
+                    className="grid size-12 place-items-center rounded-full text-white"
+                    style={{ backgroundColor: club.color }}
+                  >
+                    <UserRound className="size-6" />
+                  </span>
+                  <div>
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-foreground/50">Club Mentor</p>
+                    <p className="font-display text-base font-bold text-brand-deep">{club.mentor}</p>
+                  </div>
+                </div>
+                {club.mentorRole && (
+                  <p className="mt-4 text-[13px] text-foreground/70">{club.mentorRole}</p>
+                )}
+              </article>
+            ) : null}
 
-          <article className="rounded-2xl border border-black/5 bg-white p-6 shadow-soft">
-            <div className="flex items-center gap-3">
-              <span
-                className="grid size-12 place-items-center rounded-full text-white"
-                style={{ backgroundColor: club.color }}
-              >
-                <GraduationCap className="size-6" />
-              </span>
-              <div>
-                <p className="text-[11px] font-bold uppercase tracking-wider text-foreground/50">Student Mentor</p>
-                <p className="font-display text-base font-bold text-brand-deep">{club.studentMentor}</p>
-              </div>
-            </div>
-            <p className="mt-4 text-[13px] text-foreground/70">{club.studentMentorRole}</p>
-          </article>
-        </section>
+            {(club.studentOrganizer || club.studentMentor) ? (
+              <article className="rounded-2xl border border-black/5 bg-white p-6 shadow-soft">
+                <div className="flex items-center gap-3">
+                  <span
+                    className="grid size-12 place-items-center rounded-full text-white"
+                    style={{ backgroundColor: club.color }}
+                  >
+                    <GraduationCap className="size-6" />
+                  </span>
+                  <div>
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-foreground/50">Student Organizer</p>
+                    <p className="font-display text-base font-bold text-brand-deep">
+                      {club.studentOrganizer || club.studentMentor}
+                    </p>
+                  </div>
+                </div>
+                {(club.studentOrganizerRole || club.studentMentorRole) && (
+                  <p className="mt-4 text-[13px] text-foreground/70">
+                    {club.studentOrganizerRole || club.studentMentorRole}
+                  </p>
+                )}
+              </article>
+            ) : null}
+          </section>
+        ) : null}
 
         <section className="mt-12">
           <h2 className="font-display text-xl font-bold text-brand-deep">What we do</h2>

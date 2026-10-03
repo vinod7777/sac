@@ -11,6 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as JoinRouteImport } from './routes/join'
+import { Route as LmsRouteImport } from './routes/lms'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as AdminCmsRouteImport } from './routes/admin.cms'
+import { Route as AdminLmsRouteImport } from './routes/admin.lms'
 import { Route as ClubsSlugRouteImport } from './routes/clubs.$slug'
 import { Route as EventsIndexRouteImport } from './routes/events.index'
 import { Route as EventsSlugRouteImport } from './routes/events.$slug'
@@ -23,6 +27,26 @@ const IndexRoute = IndexRouteImport.update({
 const JoinRoute = JoinRouteImport.update({
   id: '/join',
   path: '/join',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LmsRoute = LmsRouteImport.update({
+  id: '/lms',
+  path: '/lms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminCmsRoute = AdminCmsRouteImport.update({
+  id: '/admin/cms',
+  path: '/admin/cms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminLmsRoute = AdminLmsRouteImport.update({
+  id: '/admin/lms',
+  path: '/admin/lms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ClubsSlugRoute = ClubsSlugRouteImport.update({
@@ -44,6 +68,10 @@ const EventsSlugRoute = EventsSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/join': typeof JoinRoute
+  '/lms': typeof LmsRoute
+  '/login': typeof LoginRoute
+  '/admin/cms': typeof AdminCmsRoute
+  '/admin/lms': typeof AdminLmsRoute
   '/clubs/$slug': typeof ClubsSlugRoute
   '/events/$slug': typeof EventsSlugRoute
   '/events/': typeof EventsIndexRoute
@@ -51,6 +79,10 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/join': typeof JoinRoute
+  '/lms': typeof LmsRoute
+  '/login': typeof LoginRoute
+  '/admin/cms': typeof AdminCmsRoute
+  '/admin/lms': typeof AdminLmsRoute
   '/clubs/$slug': typeof ClubsSlugRoute
   '/events/$slug': typeof EventsSlugRoute
   '/events': typeof EventsIndexRoute
@@ -59,21 +91,57 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/join': typeof JoinRoute
+  '/lms': typeof LmsRoute
+  '/login': typeof LoginRoute
+  '/admin/cms': typeof AdminCmsRoute
+  '/admin/lms': typeof AdminLmsRoute
   '/clubs/$slug': typeof ClubsSlugRoute
   '/events/$slug': typeof EventsSlugRoute
   '/events/': typeof EventsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/join' | '/clubs/$slug' | '/events/$slug' | '/events/'
+  fullPaths:
+    | '/'
+    | '/join'
+    | '/lms'
+    | '/login'
+    | '/admin/cms'
+    | '/admin/lms'
+    | '/clubs/$slug'
+    | '/events/$slug'
+    | '/events/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/join' | '/clubs/$slug' | '/events/$slug' | '/events'
-  id: '__root__' | '/' | '/join' | '/clubs/$slug' | '/events/$slug' | '/events/'
+  to:
+    | '/'
+    | '/join'
+    | '/lms'
+    | '/login'
+    | '/admin/cms'
+    | '/admin/lms'
+    | '/clubs/$slug'
+    | '/events/$slug'
+    | '/events'
+  id:
+    | '__root__'
+    | '/'
+    | '/join'
+    | '/lms'
+    | '/login'
+    | '/admin/cms'
+    | '/admin/lms'
+    | '/clubs/$slug'
+    | '/events/$slug'
+    | '/events/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   JoinRoute: typeof JoinRoute
+  LmsRoute: typeof LmsRoute
+  LoginRoute: typeof LoginRoute
+  AdminCmsRoute: typeof AdminCmsRoute
+  AdminLmsRoute: typeof AdminLmsRoute
   ClubsSlugRoute: typeof ClubsSlugRoute
   EventsSlugRoute: typeof EventsSlugRoute
   EventsIndexRoute: typeof EventsIndexRoute
@@ -93,6 +161,34 @@ declare module '@tanstack/react-router' {
       path: '/join'
       fullPath: '/join'
       preLoaderRoute: typeof JoinRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lms': {
+      id: '/lms'
+      path: '/lms'
+      fullPath: '/lms'
+      preLoaderRoute: typeof LmsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/cms': {
+      id: '/admin/cms'
+      path: '/admin/cms'
+      fullPath: '/admin/cms'
+      preLoaderRoute: typeof AdminCmsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/lms': {
+      id: '/admin/lms'
+      path: '/admin/lms'
+      fullPath: '/admin/lms'
+      preLoaderRoute: typeof AdminLmsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/clubs/$slug': {
@@ -122,6 +218,10 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   JoinRoute: JoinRoute,
+  LmsRoute: LmsRoute,
+  LoginRoute: LoginRoute,
+  AdminCmsRoute: AdminCmsRoute,
+  AdminLmsRoute: AdminLmsRoute,
   ClubsSlugRoute: ClubsSlugRoute,
   EventsSlugRoute: EventsSlugRoute,
   EventsIndexRoute: EventsIndexRoute,

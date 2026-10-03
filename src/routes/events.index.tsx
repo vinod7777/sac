@@ -1,10 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowRight, Calendar, MapPin, Tag, Sparkles } from "lucide-react";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Sections";
-import { events } from "@/data/sac";
+import { events as defaultEvents } from "@/data/sac";
 import { Reveal } from "@/components/site/Reveal";
+import { fetchCmsEvents, type CmsEvent } from "@/lib/api";
 
 export const Route = createFileRoute("/events/")({
   head: () => ({
@@ -21,10 +22,47 @@ export const Route = createFileRoute("/events/")({
 
 function EventsPage() {
   const [filter, setFilter] = useState("All");
+  const [allEvents, setAllEvents] = useState<CmsEvent[]>([]);
 
-  const filteredEvents = events.filter((e) => {
+  useEffect(() => {
+    fetchCmsEvents(false).then((data) => {
+      if (data && data.length > 0) {
+        setAllEvents(data);
+      } else {
+        setAllEvents(
+          defaultEvents.map((e, i) => ({
+            id: i + 1,
+            title: e.title,
+            slug: e.slug,
+            dates: e.dates,
+            time: e.time,
+            mode: e.mode,
+            price: e.price,
+            club: e.club,
+            location: e.location,
+            organizer: e.organizer,
+            about: e.about,
+            highlights: e.highlights,
+            prerequisites: e.prerequisites,
+            mentor: e.mentor,
+            mentorRole: e.mentorRole,
+            color: e.color,
+            icon: e.icon,
+            status: "approved",
+          })),
+        );
+      }
+    });
+  }, []);
+
+  const eventSource = allEvents.length > 0 ? allEvents : defaultEvents;
+
+  const filteredEvents = eventSource.filter((e) => {
     if (filter === "All") return true;
-    return e.club.toLowerCase().includes(filter.toLowerCase()) || e.mode.toLowerCase() === filter.toLowerCase();
+    return (
+      e.club.toLowerCase().includes(filter.toLowerCase()) ||
+      e.mode.toLowerCase() === filter.toLowerCase()
+    );
   });
 
   const categories = ["All", "Offline", "Salesforce Club", "Robotics Club", "Developers Club", "Security Club"];
@@ -84,11 +122,22 @@ function EventsPage() {
                 params={{ slug: e.slug }}
                 className="group shadow-soft flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card"
               >
-                <div
-                  className="flex h-28 items-center justify-center px-6 text-white text-center font-display text-sm font-bold transition-all group-hover:brightness-110"
-                  style={{ backgroundColor: e.color }}
-                >
-                  <span className="line-clamp-2">{e.title}</span>
+                <div className="relative flex h-28 items-center justify-center overflow-hidden px-6 text-center font-display text-sm font-bold text-white transition-all">
+                  {/* Background Image behind color */}
+                  <img
+                    src={(e as any).image || "/images.jpg"}
+                    alt=""
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 size-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  {/* Club Color Overlay */}
+                  <div
+                    className="absolute inset-0 opacity-80 mix-blend-multiply"
+                    style={{ backgroundColor: e.color || "var(--club-teal)" }}
+                  />
+                  <div className="absolute inset-0 bg-black/20" />
+
+                  <span className="relative z-10 line-clamp-2 drop-shadow-sm">{e.title}</span>
                 </div>
                 <div className="flex flex-1 flex-col justify-between p-5 space-y-4">
                   <div className="space-y-2">

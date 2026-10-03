@@ -1,8 +1,18 @@
+import { useEffect, useState } from "react";
 import heroArt from "@/assets/topnav.svg";
 import heroBg from "@/assets/hero.png";
 import { Reveal } from "./Reveal";
+import { fetchCmsContent, defaultCmsContent, type CmsHero } from "@/lib/api";
 
 export function Hero() {
+  const [hero, setHero] = useState<CmsHero>(defaultCmsContent.hero);
+
+  useEffect(() => {
+    fetchCmsContent().then((data) => {
+      if (data?.hero) setHero(data.hero);
+    });
+  }, []);
+
   return (
     <section id="top" className="relative">
       <div className="relative overflow-hidden bg-background pb-14 pt-20 sm:pb-70 sm:pt-28">
@@ -16,11 +26,19 @@ export function Hero() {
           <Reveal>
             <div>
               <h1 className="max-w-lg font-display text-2xl font-semibold leading-snug text-white sm:text-[2rem]">
-                Prepares students for success in a changing world.
+                {hero.headline}
               </h1>
               <p className="mt-5 text-sm text-white/80">
-                Learn <span className="text-accent">.</span> Build{" "}
-                <span className="text-accent">.</span> Innovate
+                {hero.tagline.includes(".") ? (
+                  hero.tagline.split(".").map((part, i, arr) => (
+                    <span key={i}>
+                      {part.trim()}
+                      {i < arr.length - 1 && <span className="text-accent"> . </span>}
+                    </span>
+                  ))
+                ) : (
+                  hero.tagline
+                )}
               </p>
             </div>
           </Reveal>

@@ -44,6 +44,17 @@ import {
   clients,
   partners,
 } from "@/data/sac";
+import {
+  fetchCmsContent,
+  fetchCmsEvents,
+  fetchCmsClubs,
+  defaultCmsContent,
+  type CmsEvent,
+  type CmsStat,
+  type CmsTestimonial,
+  type CmsMentor,
+  type CmsClub,
+} from "@/lib/api";
 
 const clientLogos = [
   { name: "Yaanve Technologies", logo: yaanveLogo },
@@ -83,17 +94,23 @@ function Heading({ children }: { children: React.ReactNode }) {
 }
 
 export function About() {
+  const [about, setAbout] = useState(defaultCmsContent.about);
+
+  useEffect(() => {
+    fetchCmsContent().then((data) => {
+      if (data?.about) setAbout(data.about);
+    });
+  }, []);
+
   return (
     <section id="about" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-14">
       <Reveal>
-        <h2 className="font-display text-3xl font-semibold text-brand-deep sm:text-4xl">About SAC</h2>
+        <h2 className="font-display text-3xl font-semibold text-brand-deep sm:text-4xl">
+          {about.title || "About SAC"}
+        </h2>
         <div className="mt-6 grid items-start gap-6 md:grid-cols-[1.5fr_1fr]">
           <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Student Activity Center is the apex student body of AITAM, responsible for formulating the
-            policies pertaining to all the non-academic affairs, resulting in a holistic workspace and
-            culture for students to explore various real time technologies, entrepreneurial
-            activities, alumni interactions etc., laying various paths for students to shape them out
-            into a better individual.
+            {about.description}
           </p>
           <img
             src={aboutArt}
@@ -110,12 +127,21 @@ export function About() {
 }
 
 export function Clubs() {
+  const [clubsList, setClubsList] = useState<CmsClub[]>(clubs as CmsClub[]);
   const [active, setActive] = useState(2);
   const trackRef = useRef<HTMLDivElement>(null);
-  const total = clubs.length;
+  const total = clubsList.length;
   const gap = 28;
   const cardWidth = 250;
   const centerOffset = (trackRef.current?.clientWidth ?? 0) / 2 - cardWidth / 2;
+
+  useEffect(() => {
+    fetchCmsClubs()
+      .then((cms) => {
+        if (cms && cms.length > 0) setClubsList(cms);
+      })
+      .catch(() => {});
+  }, []);
 
   const select = (i: number) => {
     setActive(i);
@@ -166,7 +192,7 @@ export function Clubs() {
           className="relative flex h-[440px] items-center justify-center [perspective:1400px]"
           style={{ touchAction: "pan-y" }}
         >
-          {clubs.map((c, i) => {
+          {clubsList.map((c, i) => {
             const Icon = icons[c.icon] ?? Code2;
             const offset = wrapOffset(i);
             const abs = Math.abs(offset);
@@ -246,7 +272,7 @@ export function Clubs() {
 
 export function WhatWeDo() {
   return (
-    <section className="py-16">
+    <section id="what-we-do" className="scroll-mt-24 py-16">
       <div className="mx-auto max-w-7xl px-0">
         {/* Section Heading */}
         <div className="mb-0 text-center">
@@ -391,11 +417,19 @@ function Ring({ value, max, label, suffix = "" }: { value: number; max: number; 
 }
 
 export function Stats() {
+  const [statList, setStatList] = useState<CmsStat[]>(defaultCmsContent.stats);
+
+  useEffect(() => {
+    fetchCmsContent().then((data) => {
+      if (data?.stats && Array.isArray(data.stats)) setStatList(data.stats);
+    });
+  }, []);
+
   return (
     <section id="stats" className="scroll-mt-24 py-14">
       <Heading>Activities Done By SAC</Heading>
       <div className="mx-auto mt-10 grid max-w-5xl grid-cols-2 gap-10 px-5 lg:grid-cols-4">
-        {stats.map((s, i) => (
+        {statList.map((s, i) => (
           <Reveal key={s.label} delay={i * 0.2}>
             <Ring value={s.value} max={s.max} label={s.label} suffix={s.value >= 1000 ? "+" : ""} />
           </Reveal>
@@ -405,24 +439,46 @@ export function Stats() {
   );
 }
 
-
 export function Events() {
+  const [liveEvents, setLiveEvents] = useState<CmsEvent[]>([]);
+
+  useEffect(() => {
+    fetchCmsEvents(false).then((data) => {
+      if (data && data.length > 0) {
+        setLiveEvents(data.slice(0, 3));
+      }
+    });
+  }, []);
+
+  const displayList = liveEvents.length > 0 ? liveEvents : events.slice(0, 3);
+
   return (
     <section id="events" className="scroll-mt-24 bg-section py-14">
       <Heading>New Events</Heading>
       <div className="mx-auto mt-10 grid max-w-5xl gap-5 px-5 md:grid-cols-3">
-        {events.slice(0, 3).map((e, i) => (
+        {displayList.map((e, i) => (
           <Reveal key={e.slug || e.title} delay={i * 0.1} className="h-full">
             <Link
               to="/events/$slug"
               params={{ slug: e.slug }}
               className="shadow-soft flex h-full flex-col justify-between overflow-hidden rounded-lg border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card group"
             >
-              <div
-                className="flex h-24 items-center justify-center px-4 text-center font-display text-sm font-semibold text-primary-foreground line-clamp-2 transition-all group-hover:brightness-110"
-                style={{ backgroundColor: e.color || "var(--brand)" }}
-              >
-                <span>{e.title}</span>
+              <div className="relative flex h-24 items-center justify-center overflow-hidden px-4 text-center font-display text-sm font-semibold text-primary-foreground transition-all">
+                {/* Background Image behind color */}
+                <img
+                  src={(e as any).image || "/images.jpg"}
+                  alt=""
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 size-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                {/* Club Color Overlay */}
+                <div
+                  className="absolute inset-0 opacity-80 mix-blend-multiply"
+                  style={{ backgroundColor: e.color || "var(--brand)" }}
+                />
+                <div className="absolute inset-0 bg-black/20" />
+
+                <span className="relative z-10 line-clamp-2 drop-shadow-sm">{e.title}</span>
               </div>
               <div className="flex flex-1 flex-col justify-between space-y-2 p-4">
                 <div>
@@ -455,11 +511,20 @@ export function Events() {
 }
 
 export function Testimonials() {
+  const [testimonialList, setTestimonialList] = useState<CmsTestimonial[]>(defaultCmsContent.testimonials);
   const [perView, setPerView] = useState(2);
   const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(false);
   const [paused, setPaused] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    fetchCmsContent().then((data) => {
+      if (data?.testimonials && Array.isArray(data.testimonials)) {
+        setTestimonialList(data.testimonials);
+      }
+    });
+  }, []);
 
   useEffect(() => {
     const apply = () => setPerView(window.innerWidth < 640 ? 1 : 2);
@@ -468,7 +533,7 @@ export function Testimonials() {
     return () => window.removeEventListener("resize", apply);
   }, []);
 
-  const pages = Math.max(1, Math.ceil(testimonials.length / perView));
+  const pages = Math.max(1, Math.ceil(testimonialList.length / perView));
 
   useEffect(() => {
     setIndex((i) => Math.min(i, pages - 1));
@@ -535,7 +600,7 @@ export function Testimonials() {
                 key={p}
                 className="grid w-full shrink-0 gap-5 px-1 sm:grid-cols-2"
               >
-                {testimonials.slice(p * perView, p * perView + perView).map((t, i) => (
+                {testimonialList.slice(p * perView, p * perView + perView).map((t, i) => (
                   <figure
                     key={t.name}
                     style={{ transitionDelay: `${i * 90}ms` }}
@@ -587,6 +652,30 @@ export function Testimonials() {
 }
 
 export function Mentors() {
+  const [mentorsList, setMentorsList] = useState<CmsMentor[]>(mentors);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetchCmsContent()
+      .then((res) => {
+        if (
+          isMounted &&
+          res?.mentors &&
+          Array.isArray(res.mentors)
+        ) {
+          setMentorsList(res.mentors);
+        }
+      })
+      .catch(() => {});
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  if (!mentorsList || mentorsList.length === 0) {
+    return null;
+  }
+
   return (
     <section id="mentors" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-14">
       <Reveal>
@@ -594,25 +683,29 @@ export function Mentors() {
         <div className="mt-2 h-px w-full bg-brand-deep/60" />
       </Reveal>
       <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {mentors.map((m, i) => (
-          <Reveal key={m.name} delay={i * 0.1}>
+        {mentorsList.map((m, i) => (
+          <Reveal key={`${m.name}-${i}`} delay={i * 0.08}>
             <article
               className="shadow-soft overflow-hidden rounded-lg border border-border bg-card transition-transform hover:-translate-y-1"
             >
-              <div className="grid h-36 place-items-center bg-secondary">
-                <span className="grid size-16 place-items-center rounded-full bg-brand/10 font-display text-lg font-semibold text-brand">
-                  {m.name
-                    .replace(/[^A-Za-z. ]/g, "")
-                    .split(/[. ]+/)
-                    .filter(Boolean)
-                    .slice(-2)
-                    .map((p) => p[0])
-                    .join("")}
-                </span>
+              <div className="relative grid h-36 place-items-center overflow-hidden bg-secondary">
+                {m.image ? (
+                  <img src={m.image} alt={m.name} className="size-full object-cover" />
+                ) : (
+                  <span className="grid size-16 place-items-center rounded-full bg-brand/10 font-display text-lg font-semibold text-brand">
+                    {m.name
+                      .replace(/[^A-Za-z. ]/g, "")
+                      .split(/[. ]+/)
+                      .filter(Boolean)
+                      .slice(-2)
+                      .map((p) => p[0])
+                      .join("")}
+                  </span>
+                )}
               </div>
               <div className="p-4">
                 <h3 className="font-display text-[13px] font-semibold text-brand-deep">{m.name}</h3>
-                <p className="mt-1 text-[11px] text-muted-foreground">{m.role}</p>
+                <p className="mt-1 text-[11px] font-medium text-brand">{m.role}</p>
                 <p className="text-[11px] text-muted-foreground">{m.area}</p>
               </div>
             </article>

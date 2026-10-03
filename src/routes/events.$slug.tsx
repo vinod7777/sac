@@ -19,6 +19,7 @@ import {
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Sections";
 import { events } from "@/data/sac";
+import { fetchCmsEvents } from "@/lib/api";
 
 const icons: Record<string, typeof Code2> = {
   Cloud,
@@ -28,8 +29,19 @@ const icons: Record<string, typeof Code2> = {
 };
 
 export const Route = createFileRoute("/events/$slug")({
-  loader: ({ params }) => {
-    const event = events.find((e) => e.slug === params.slug);
+  loader: async ({ params }) => {
+    const cmsEvents = await fetchCmsEvents(true);
+    let event = cmsEvents.find((e) => e.slug === params.slug);
+    if (!event) {
+      const fallback = events.find((e) => e.slug === params.slug);
+      if (fallback) {
+        event = {
+          ...fallback,
+          status: "approved",
+          highlights: fallback.highlights || [],
+        };
+      }
+    }
     if (!event) throw notFound();
     return { event };
   },
@@ -77,7 +89,10 @@ function EventDetail() {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      <header className="relative overflow-hidden pt-28 pb-24" style={{ backgroundColor: event.color }}>
+      <header
+        className="relative overflow-hidden pt-28 pb-24"
+        style={{ backgroundColor: event.color || "var(--club-teal)" }}
+      >
         <div className="pointer-events-none absolute -right-24 -top-24 size-80 rounded-full bg-white/10 blur-3xl" />
         <div className="relative mx-auto max-w-5xl px-6 text-white">
           <Link
@@ -170,6 +185,15 @@ function EventDetail() {
 
           {/* Sidebar */}
           <div className="space-y-6">
+            {/* Event Banner Image displayed above Event Information */}
+            <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-soft transition-all duration-300 hover:shadow-card">
+              <img
+                src={(event as any).image || "/images.jpg"}
+                alt={event.title}
+                className="aspect-video w-full object-cover"
+              />
+            </div>
+
             <article className="rounded-2xl border border-black/5 bg-card p-6 shadow-soft space-y-4">
               <h3 className="font-display text-base font-bold text-brand-deep border-b border-border pb-3">
                 Event Information
@@ -188,7 +212,10 @@ function EventDetail() {
                   <span className="font-semibold text-muted-foreground uppercase text-[10px] tracking-wider block">Lead Mentor</span>
                   <span className="font-medium text-foreground flex items-center gap-1.5 mt-0.5">
                     <UserRound className="size-3.5 text-brand shrink-0" />
-                    {event.mentor} ({event.mentorRole})
+                    {event.mentor}
+                    {event.mentorRole || (event as any).mentor_role
+                      ? ` (${event.mentorRole || (event as any).mentor_role})`
+                      : ""}
                   </span>
                 </div>
 
@@ -226,8 +253,19 @@ function EventDetail() {
                   params={{ slug: e.slug }}
                   className="shadow-soft flex flex-col justify-between overflow-hidden rounded-xl border border-border bg-card transition-transform hover:-translate-y-1"
                 >
-                  <div className="flex h-20 items-center justify-center px-4 text-white text-center font-display text-xs font-bold" style={{ backgroundColor: e.color }}>
-                    {e.title}
+                  <div className="relative flex h-20 items-center justify-center overflow-hidden px-4 text-center font-display text-xs font-bold text-white">
+                    <img
+                      src={(e as any).image || "/images.jpg"}
+                      alt=""
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-0 size-full object-cover"
+                    />
+                    <div
+                      className="absolute inset-0 opacity-80 mix-blend-multiply"
+                      style={{ backgroundColor: e.color || "var(--club-teal)" }}
+                    />
+                    <div className="absolute inset-0 bg-black/20" />
+                    <span className="relative z-10 line-clamp-2 drop-shadow-sm">{e.title}</span>
                   </div>
                   <div className="p-4 flex-1 flex flex-col justify-between space-y-2">
                     <div>

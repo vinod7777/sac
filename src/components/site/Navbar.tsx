@@ -4,6 +4,7 @@ import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import whiteLogo from "@/assets/sac-white-logo.png";
 import colorLogo from "@/assets/sac-logo.png";
 import { scrollToHash, scrollToHashWhenReady } from "@/lib/smooth-scroll";
+import { fetchCmsContent, defaultCmsContent, type CmsAnnouncement } from "@/lib/api";
 
 const links = [
   { label: "Home", href: "top" },
@@ -20,9 +21,20 @@ const links = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [announcement, setAnnouncement] = useState<CmsAnnouncement>(defaultCmsContent.announcement);
+  const [hasMentors, setHasMentors] = useState(false);
   const navigate = useNavigate();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const onHome = pathname === "/";
+
+  useEffect(() => {
+    fetchCmsContent().then((data) => {
+      if (data?.announcement) setAnnouncement(data.announcement);
+      if (Array.isArray(data?.mentors) && data.mentors.length > 0) {
+        setHasMentors(true);
+      }
+    });
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -48,6 +60,26 @@ export function Navbar() {
         scrolled ? "bg-background shadow-soft" : "bg-transparent"
       }`}
     >
+      {/* Top Announcement Ticker Banner if enabled in CMS */}
+      {announcement.enabled && announcement.message && (
+        <div className="bg-brand-deep/95 py-1.5 px-4 text-center text-xs text-white backdrop-blur-sm">
+          <div className="mx-auto flex max-w-7xl items-center justify-center gap-2">
+            <span className="rounded-full bg-white/20 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
+              {announcement.badge || "Notice"}
+            </span>
+            <span className="truncate font-medium">{announcement.message}</span>
+            {announcement.link && announcement.linkText && (
+              <Link
+                to={announcement.link}
+                className="ml-1 shrink-0 font-bold underline transition-colors hover:text-white/80"
+              >
+                {announcement.linkText} →
+              </Link>
+            )}
+          </div>
+        </div>
+      )}
+
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3">
         <a href="/" onClick={(e) => go(e, "top")} className="relative flex h-12 items-center">
           <img
@@ -67,23 +99,35 @@ export function Navbar() {
         </a>
 
         <div className="hidden items-center gap-1 xl:flex">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={`/#${l.href}`}
-              onClick={(e) => go(e, l.href)}
-              className={`rounded px-3 py-2 text-[13px] font-medium transition-colors ${
-                scrolled
-                  ? "text-brand-deep/80 hover:text-brand-deep"
-                  : "text-primary-foreground/85 hover:text-primary-foreground"
-              }`}
-            >
-              {l.label}
-            </a>
-          ))}
+          {links
+            .filter((l) => l.href !== "mentors" || hasMentors)
+            .map((l) => (
+              <a
+                key={l.href}
+                href={`/#${l.href}`}
+                onClick={(e) => go(e, l.href)}
+                className={`rounded px-3 py-2 text-[13px] font-medium transition-colors ${
+                  scrolled
+                    ? "text-brand-deep/80 hover:text-brand-deep"
+                    : "text-primary-foreground/85 hover:text-primary-foreground"
+                }`}
+              >
+                {l.label}
+              </a>
+            ))}
+          <Link
+            to="/login"
+            className={`ml-2 rounded-full px-4 py-2 text-[13px] font-semibold transition-all duration-300 ${
+              scrolled
+                ? "text-brand-deep hover:bg-brand-deep/10"
+                : "text-primary-foreground hover:bg-white/10"
+            }`}
+          >
+            Login
+          </Link>
           <Link
             to="/join"
-            className={`ml-2 rounded-full px-5 py-2 text-[13px] font-semibold transition-all duration-300 ${
+            className={`ml-1 rounded-full px-5 py-2 text-[13px] font-semibold transition-all duration-300 ${
               scrolled
                 ? "bg-brand-deep text-primary-foreground hover:brightness-110"
                 : "bg-white text-brand-deep hover:bg-white/90"
@@ -108,23 +152,34 @@ export function Navbar() {
 
       {open && (
         <div className="bg-brand-deep px-5 pb-4 xl:hidden">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={`/#${l.href}`}
-              onClick={(e) => go(e, l.href)}
-              className="block py-2 text-sm text-primary-foreground/85"
+          {links
+            .filter((l) => l.href !== "mentors" || hasMentors)
+            .map((l) => (
+              <a
+                key={l.href}
+                href={`/#${l.href}`}
+                onClick={(e) => go(e, l.href)}
+                className="block py-2 text-sm text-primary-foreground/85"
+              >
+                {l.label}
+              </a>
+            ))}
+          <div className="mt-3 flex flex-col gap-2">
+            <Link
+              to="/login"
+              onClick={() => setOpen(false)}
+              className="block rounded-full border border-white/30 px-5 py-2 text-center text-sm font-semibold text-white transition-colors hover:bg-white/10"
             >
-              {l.label}
-            </a>
-          ))}
-          <Link
-            to="/join"
-            onClick={() => setOpen(false)}
-            className="mt-3 block rounded-full bg-white px-5 py-2 text-center text-sm font-semibold text-brand-deep"
-          >
-            Join SAC
-          </Link>
+              Login
+            </Link>
+            <Link
+              to="/join"
+              onClick={() => setOpen(false)}
+              className="block rounded-full bg-white px-5 py-2 text-center text-sm font-semibold text-brand-deep"
+            >
+              Join SAC
+            </Link>
+          </div>
         </div>
       )}
     </header>
